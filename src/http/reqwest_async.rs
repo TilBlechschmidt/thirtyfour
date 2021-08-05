@@ -25,7 +25,7 @@ impl WebDriverHttpClientAsync for ReqwestDriverAsync {
         let headers = build_reqwest_headers(&url)?;
         let mut driver = ReqwestDriverAsync {
             url,
-            client: reqwest::Client::builder().default_headers(headers).build()?,
+            client: reqwest::Client::builder().default_headers(headers).trust_dns(true).build()?,
             timeout: Duration::from_secs(120),
         };
         if let Some(timeout) = params.timeout {
